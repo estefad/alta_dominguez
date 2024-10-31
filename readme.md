@@ -95,6 +95,14 @@ Inserta un nuevo paciente en la base de datos.
 CALL insertar_nuevo_paciente('vero giachino', 'vero.g@gmail.com', '12345678', '1122334455', 1);
 ```
 
+## `listar_todos_los_turnos()`
+Este procedimiento devuelve una lista de todos los turnos, incluyendo el nombre del pac
+
+**Ejemplo de uso:**
+```sql
+CALL listar_todo_los_turnos();
+```
+
 ### `listar_turnos_confirmados()`
 Devuelve todos los turnos que están en estado "Confirmado".
 
@@ -126,3 +134,24 @@ Este trigger se activa después de insertar un nuevo turno y actualiza el cupo d
 INSERT INTO alta_turnos.turnos (id_paciente, id_especialista, id_dia, estado_turno)
 VALUES (1, 2, 3, 'Confirmado');
 ```
+
+
+## Roles
+
+Crea un usuario y solo le da acceso a la insercion de cupos y agregar pacientes de manera manual
+```sql
+GRANT SELECT, INSERT ON alta_turnos.dias TO 'estefania_d'@'%';
+GRANT SELECT, INSERT ON alta_turnos.pacientes TO 'estefania_d'@'%';
+```
+
+## Transacciones
+
+Inserta un nuevo paciente y asignarle un turno
+```sql
+INSERT INTO alta_turnos.pacientes(nombre_completo, email, dni, telefono, id_obraSocial)
+VALUES ('vero giachino', 'vero.g@gmail.com', '12345678', '56466546', 5) ;
+
+INSERT INTO alta_turnos.turnos(estado_turno, observaciones, id_especialista, id_paciente, id_dia)
+VALUES ('Confirmado', 'Turno confirmado', 1, 1, 1);
+```
+Usando COMMIT agrego los cambios, de lo contrario, con ROLLBACK, se deshacen

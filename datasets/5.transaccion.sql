@@ -7,7 +7,8 @@ START TRANSACTION;
 INSERT INTO alta_turnos.pacientes (nombre_completo, email, dni, telefono, id_obraSocial)
 VALUES ('Andrea Ruiz', 'andrea.ruiz@mail.com', '49863578', '3466351', 2);
 
--- Asignar un turno a ese paciente (id_paciente es el último insertado)
+-- Asignar un turno a ese paciente (id_paciente es el último insertado, uso LAST_INSERT_ID para que al momento de insercion del paciente
+-- se obtenga el id del paciente insertado)
 INSERT INTO alta_turnos.turnos (estado_turno, observaciones, id_especialista, id_paciente, id_dia)
 VALUES ('Pendiente', 'Primera consulta', 1, LAST_INSERT_ID(), 2);
 
