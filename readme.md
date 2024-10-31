@@ -1,3 +1,7 @@
+# Proyecto Final - SQL
+## Comision - 59410
+## Alumna: Dominguez Estefania
+
 
 # Base de Datos `alta_turnos`
 # Modelo de Negocio: Sistema de Gestión de Turnos en Salud Mental - 
@@ -80,7 +84,7 @@ Este ejemplo retornará una lista de días y la cantidad de turnos asociados a c
 
 ## Procedimientos
 
-### `insertar_nuevo_paciente()`
+## `insertar_nuevo_paciente()`
 Inserta un nuevo paciente en la base de datos.
 
 **Parámetros:**
@@ -95,7 +99,7 @@ Inserta un nuevo paciente en la base de datos.
 CALL insertar_nuevo_paciente('vero giachino', 'vero.g@gmail.com', '12345678', '1122334455', 1);
 ```
 
-## `listar_todos_los_turnos()`
+### `listar_todos_los_turnos()`
 Este procedimiento devuelve una lista de todos los turnos, incluyendo el nombre del pac
 
 **Ejemplo de uso:**
@@ -135,15 +139,6 @@ INSERT INTO alta_turnos.turnos (id_paciente, id_especialista, id_dia, estado_tur
 VALUES (1, 2, 3, 'Confirmado');
 ```
 
-
-## Roles
-
-Crea un usuario y solo le da acceso a la insercion de cupos y agregar pacientes de manera manual
-```sql
-GRANT SELECT, INSERT ON alta_turnos.dias TO 'estefania_d'@'%';
-GRANT SELECT, INSERT ON alta_turnos.pacientes TO 'estefania_d'@'%';
-```
-
 ## Transacciones
 
 Inserta un nuevo paciente y asignarle un turno
@@ -155,3 +150,18 @@ INSERT INTO alta_turnos.turnos(estado_turno, observaciones, id_especialista, id_
 VALUES ('Confirmado', 'Turno confirmado', 1, 1, 1);
 ```
 Usando COMMIT agrego los cambios, de lo contrario, con ROLLBACK, se deshacen
+
+## Roles
+
+Crea un usuario y solo le da acceso a la insercion de cupos y agregar pacientes de manera manual
+```sql
+GRANT SELECT, INSERT ON alta_turnos.dias TO 'estefania_d'@'%';
+GRANT SELECT, INSERT ON alta_turnos.pacientes TO 'estefania_d'@'%';
+```
+Usuario con solo permisos de lectura de la tabla turnos
+```sql
+GRANT SELECT ON alta_turnos.dias TO 'camila.ceballos'@'%';
+
+```
+
+
